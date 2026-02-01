@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@kerni124</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" sizes="48x48"  href="media/icons/title.png">
+</head>
+<body>
+  <!-- Startbildschirm -->
+<div id="startScreen" class="start-screen">
+  <p class="click-text">click to enter</p>
+</div>
+
+<!-- Hintergrundvideo -->
+<video id="bgVideo" autoplay muted playsinline loop></video>
+
+<!-- Lautstärke-Steuerung -->
+<div id="volumeControl" class="volume-control">
+  <img src="media/icons/volume.png" class="volume-icon" alt="Volume">
+
+  <div class="volume-track">
+    <div class="volume-fill" id="volumeFill"></div>
+  </div>
+</div>
+
+
+
+
+<!-- Benutzerdefinierter Text -->
+<div id="customText" class="custom-text">
+  <div>
+    <img src="media/pictures/pb.png" alt="Benutzerbild" class="pb-bild"/><br><br>
+    <span id="userText">@kerni124</span><br><br><br>
+
+    <div>
+      <img src="media/icons/location.png" class="locationIMG"/>
+      <a href="https://www.google.com/maps/place/%C3%96sterreich/@47.6964331,13.3457683,783581m/data=!3m1!1e3!4m6!3m5!1s0x476d079b259d2a7f:0x1012d47bdde4c1af!8m2!3d47.516231!4d14.550072!16zL20vMGg3eA!5m1!1e4?entry=ttu&g_ep=EgoyMDI2MDEyNi4wIKXMDSoASAFQAw%3D%3D"class="locationLink">Austria</a>
+    </div><br><br>
+    <div>
+      <img src="media/icons/css.png" alt="Css Logo" id="css-logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <img src="media/icons/html.png" alt="HTML Logo" id="html-logo">
+    </div><br><br>
+    <div>
+      <img src="media/icons/left.webp" alt="Left Icon" id="lefticon" />
+    
+    
+      <div class="tooltip-wrapper">
+        <img src="media/icons/soon.png" alt="Soon!" class="icon-tooltip" />
+        <span class="tooltip-text">coming soon</span>
+      </div>
+
+      <img src="media/icons/right.webp" alt="Right Icon" id="righticon" />
+    </div><br><br>
+  </div>
+</div>
+
+<!-- Musikplayer -->
+<div id="musicPlayer" class="music-player">
+  <div class="cover-container">
+    <img id="coverArt" src="" alt="Cover" />
+  </div>
+  <div class="main-content">
+    <div class="track-info">
+      <span id="trackTitle">Titel</span>
+      <span id="span"> - </span>
+      <span id="trackArtist">Künstler</span>
+    </div>
+    <div class="player-controls-row">
+      <div class="progress-container">
+        <input type="range" id="progressBar" min="0" max="100" value="0" step="0.1" />
+      </div>
+      <div class="controls">
+        <button id="prevBtn" class="control-btn">
+          <img src="media/icons/back.png" alt="Zurück" />
+        </button>
+        <button id="playPauseBtn" class="control-btn">
+          <img src="media/icons/play.png" alt="Play" id="playPauseIcon" />
+        </button>
+        <button id="nextBtn" class="control-btn">
+          <img src="media/icons/next.png" alt="Weiter" />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
