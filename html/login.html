@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Access</title>
+    <link rel="stylesheet" href="../css/login-style.css">
+</head>
+<body>
+
+    <video autoplay muted loop id="bg-video">
+        <source src="../media/video/Don Toliver - FWU [Official Music Video] - Don Toliver (1080p, h264, youtube).mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="login-container">
+        <h1>Access Code</h1>
+        
+        <input type="password" id="inputField" placeholder="ENTER CODE" autocomplete="off">
+        
+        <div class="action-area">
+            <button id="loginBtn" onclick="handleLogin()">Login</button>
+            <div id="loader" class="loader" style="display: none;"></div>
+        </div>
+        
+        <p id="message"></p>
+    </div>
+    <script src="../js/login.js"></script>
+</body>
+</html>

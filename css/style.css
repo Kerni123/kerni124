@@ -1,6 +1,7 @@
+/* === 1. BASIS & SCHRIFTEN (ORIGINAL) === */
 @font-face {
-  font-family: typewriter; /* set name */
-  src: url(../media/fonts/typewriterA602_________\ \(1\).ttf); /* url of the font */
+  font-family: typewriter;
+  src: url(../media/fonts/typewriterA602_________\ \(1\).ttf);
 }
 
 * {
@@ -11,15 +12,16 @@
 
 html, body {
   height: 100%;
+  width: 100%;
   overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  cursor: url('../media/icons/image.png') 16 16, auto; /* Pfad anpassen! */
+  cursor: url('../media/icons/image.png') 16 16, auto;
 }
 
-/* Startbildschirm mit unscharfem Hintergrund */
+/* === 2. STARTBILDSCHIRM (ORIGINAL + RESPONSIVE) === */
 .start-screen {
   position: fixed;
   top: 0;
@@ -28,7 +30,7 @@ body {
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Für Safari */
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,13 +40,13 @@ body {
 
 .click-text {
   color: white;
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 8vw, 2.5rem); /* Dynamisch für iPhone */
   font-family: typewriter;
   letter-spacing: 4px;
   opacity: 0.9;
+  text-align: center;
 }
 
-/* Video wird auf volle Größe gestreckt, sobald sichtbar */
 #bgVideo {
   position: fixed;
   top: 0;
@@ -55,13 +57,13 @@ body {
   z-index: 1;
 }
 
-/* === Volume Control (Icon + Bar = EIN Element) === */
+/* === 3. VOLUME CONTROL (ORIGINAL MIT FIX FÜR HOVER) === */
 .volume-control {
   position: fixed;
   top: 20px;
   left: 20px;
   height: 48px;
-  width: 48px;              
+  width: 48px;
   padding: 8px;
   display: none;
   align-items: center;
@@ -77,9 +79,10 @@ body {
   display: flex;
 }
 
-/* Hover → Container fährt nach rechts aus */
-.volume-control:hover {
-  width: 190px; /* Icon + Abstand + 120px Bar */
+/* Hover-Effekt nur auf Geräten mit Maus */
+@media (hover: hover) {
+  .volume-control:hover { width: 190px; }
+  .volume-control:hover .volume-track { opacity: 1; }
 }
 
 .volume-icon {
@@ -100,10 +103,6 @@ body {
   transition: opacity 0.2s ease;
 }
 
-.volume-control:hover .volume-track {
-  opacity: 1;
-}
-
 .volume-fill {
   position: absolute;
   left: 0;
@@ -119,27 +118,25 @@ body {
   opacity: 0.7;
 }
 
-/* === Musikplayer – alles in einer kompakten Zeile === */
+/* === 4. MUSIKPLAYER (ALLE ORIGINAL-REGELN + IPHONE FIX) === */
 .music-player {
   position: fixed;
   top: 75%;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
+  display: none;
   background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(128, 128, 0, 0.8));
   border-radius: 16px;
   padding: 8px 12px;
-  width: 670px;
+  width: 90%; /* Verhindert Überlappen am iPhone */
+  max-width: 670px; /* Originalbreite */
   z-index: 999;
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  align-items: flex-start;
+  align-items: center; /* Zentriert Inhalte vertikal */
   gap: 12px;
-  flex-wrap: wrap; /* Für Responsive */
 }
 
-.music-player.visible {
-  display: flex;
-}
+.music-player.visible { display: flex; }
 
 .cover-container {
   width: 80px;
@@ -161,6 +158,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   gap: 4px;
+  min-width: 0; /* Verhindert Text-Explosion */
 }
 
 .track-info {
@@ -171,28 +169,20 @@ body {
   overflow: hidden;
 }
 
-#trackTitle,
-#trackArtist,
-#separator {
+#trackTitle, #trackArtist, #separator {
   color: white;
   font-size: 1.1rem;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-#trackArtist {
-  color: #ccc;
-}
-
-#span {
-  color: rgba(255, 255, 255, 0.7);
-}
+#trackArtist { color: #ccc; }
+#span { color: rgba(255, 255, 255, 0.7); }
 
 .player-controls-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap; /* Responsive */
 }
 
 .progress-container {
@@ -201,6 +191,8 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 2px;
   position: relative;
+  display: flex;
+  align-items: center; /* Zentriert den Punkt auf der Linie */
 }
 
 #progressBar {
@@ -213,6 +205,7 @@ body {
   cursor: pointer;
 }
 
+/* FIX FÜR DEN PUNKT (THUMB) */
 #progressBar::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 12px;
@@ -220,14 +213,13 @@ body {
   border-radius: 50%;
   background: olivedrab;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-top: 0; /* Fix: Kein margin-bottom mehr, damit er auf der Linie bleibt */
 }
 
 .controls {
   display: flex;
   gap: 8px;
   flex-shrink: 0;
-  flex-wrap: wrap; /* Responsive */
 }
 
 .control-btn {
@@ -244,16 +236,10 @@ body {
   transition: background 0.2s;
 }
 
-.control-btn:hover {
-  background: rgba(255,255,255,0.3);
-}
+.control-btn:hover { background: rgba(255,255,255,0.3); }
+.control-btn img { width: 16px; height: 16px; pointer-events: none; }
 
-.control-btn img {
-  width: 16px;
-  height: 16px;
-  pointer-events: none;
-}
-
+/* === 5. PROFIL BOX (CUSTOM TEXT) === */
 .custom-text {
   position: fixed;
   top: 20%;
@@ -264,30 +250,29 @@ body {
   text-align: center;
   z-index: 999;
   display: none;
-  padding-top: 30px;
-  width: 670px;
-  height: 450px;
+  padding: 30px 15px;
+  width: 90%;
+  max-width: 670px;
+  min-height: 450px;
+  height: auto;
   border-radius: 12px;
   background: linear-gradient(to bottom left, rgba(128, 128, 0, 0.95), rgba(0, 0, 0, 0.95));
+  overflow-y: auto; /* Scrollbar falls Handy-Bildschirm zu klein */
 }
 
-.custom-text.visible {
-  display: block;
-}
+.custom-text.visible { display: block; }
 
 .pb-bild {
   width: 130px;
   border-radius: 100%;
-  max-width: 25vw; /* Responsive */
-}
-
-.pb-bild:hover {
-  transform: scale(1.1);
+  max-width: 25vw;
   transition: transform 0.4s;
 }
 
+.pb-bild:hover { transform: scale(1.1); }
+
 #userText {
-  font-size: clamp(18px, 2.5vw, 29px); /* Responsive */
+  font-size: clamp(18px, 4vw, 29px);
   color: white;
   text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
 }
@@ -297,8 +282,7 @@ body {
   vertical-align: middle;
   font-size: 1.6rem;
   color: white;
-  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.8))
-          drop-shadow(0 0 28px rgba(255, 255, 255, 0.5));
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 28px rgba(255, 255, 255, 0.5));
   animation: pulse 3s infinite alternate;
 }
 
@@ -311,21 +295,19 @@ body {
   color: white;
   text-decoration: none;
   margin-left: 8px;
-  font-size: clamp(12px, 1.5vw, 15px); /* Responsive */
+  font-size: clamp(12px, 3vw, 15px);
   text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px white;
 }
 
+/* === 6. ICONS & TOOLTIPS (ORIGINAL) === */
 #lefticon, #righticon {
   width: 40px;
   height: 40px;
-  margin: 0 60px;
-  max-width: 10vw; /* Responsive */
-}
-
-#lefticon:hover, #righticon:hover {
-  transform: scale(1.3);
+  margin: 0 clamp(10px, 5vw, 60px); /* Flexibler Abstand für iPhone */
   transition: transform 0.4s;
 }
+
+#lefticon:hover, #righticon:hover { transform: scale(1.3); }
 
 .tooltip-wrapper {
   position: relative;
@@ -335,7 +317,7 @@ body {
 .icon-tooltip {
   width: 40px;
   cursor: pointer;
-  max-width: 10vw; /* Responsive */
+  transition: transform 0.4s;
 }
 
 .tooltip-text {
@@ -370,78 +352,40 @@ body {
   transform: translateX(-50%) translateY(-4px);
 }
 
-.icon-tooltip:hover {
-  transform: scale(1.2);
+.icon-tooltip:hover { transform: scale(1.2); }
+
+/* === 7. LOGO SPEZIFIKATIONEN (ORIGINAL + FIX) === */
+#css-logo { width: 35px; }
+#html-logo { width: 50px; }
+
+#html-logo:hover {
+  transform: scale(1.3) rotate(0.8deg);
   transition: transform 0.4s;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-.custom-text, .music-player {
-  max-width: 90%;
-  width: 670px;
-  height: auto;
+#css-logo:hover {
+  transform: scale(1.3) rotate(0.8deg);
+  transition: transform 0.4s;
+  /* GRÜNER HINTERGRUND ENTFERNT WIE GEWÜNSCHT */
 }
 
-.music-player {
-  justify-content: center;
-}
-
-.player-controls-row {
-  gap: 4px;
-}
-
+/* === 8. MOBILE OPTIMIERUNGEN (IPHONE 15) === */
 @media (max-width: 768px) {
-  .volume-control {
-    top: 10px;
-    left: 10px;
-    padding: 6px;
-  }
-
-  .volume-control:hover {
-    width: 160px;
-  }
-
-  #lefticon, #righticon {
-    margin: 0 30px;
-  }
+  .volume-control { top: 10px; left: 10px; }
 }
 
 @media (max-width: 480px) {
-  .custom-text {
-    top: 15%;
-    padding: 20px;
-  }
-
-  #userText {
-    font-size: 20px;
-  }
-
-  .pb-bild {
-    width: 90px;
-  }
-
   .music-player {
+    flex-direction: column; /* Stapelt Cover über Text am Handy */
+    padding: 15px;
+  }
+  
+  .player-controls-row {
     flex-direction: column;
-    align-items: center;
-    padding: 6px 8px;
+    width: 100%;
   }
 
-  .controls, .player-controls-row {
-    flex-direction: column;
-    gap: 4px;
+  .controls {
+    justify-content: center;
   }
-}
-#css-logo{
-  width: 35px;
-}
-#html-logo{
-  width: 50px;
-}
-#html-logo:hover{
-  transform: scale(1.3) rotate(0.8deg);;
-  transition: transform 0.4s;
-}
-#css-logo:hover{
-  transform: scale(1.3) rotate(0.8deg);;
-  transition: transform 0.4s;
 }
